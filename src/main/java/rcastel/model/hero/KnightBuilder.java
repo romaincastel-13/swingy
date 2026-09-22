@@ -6,7 +6,7 @@ public class KnightBuilder {
     private int experience = 0;
     private int attack = 8;
     private int defense = 10;
-    private int hitPoints = 100;
+    private int hitPoints = 110;
     private Gear weapon;
     private Gear armor = new Gear("Chainmail", Gear.Type.ARMOR, 2);
     private Gear helm;

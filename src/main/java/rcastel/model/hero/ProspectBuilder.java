@@ -1,57 +1,57 @@
 package rcastel.model.hero;
 
-public class SavageBuilder {
-	private String heroName = "Savage";
+public class ProspectBuilder {
+	private String heroName = "Prospect";
 	private int level = 1;
 	private int experience = 0;
-	private int attack = 11;
-	private int defense = 7;
-	private int hitPoints = 100;
-	private Gear weapon = new Gear("Claws", Gear.Type.WEAPON, 4);
+	private int attack = 6;
+	private int defense = 6;
+	private int hitPoints = 70;
+	private Gear weapon;
 	private Gear armor;
 	private Gear helm;
 
-	public SavageBuilder name(String heroName) {
+	public ProspectBuilder name(String heroName) {
 		this.heroName = heroName;
 		return this;
 	}
 
-	public SavageBuilder level(int level) {
+	public ProspectBuilder level(int level) {
 		this.level = level;
 		return this;
 	}
 
-	public SavageBuilder experience(int experience) {
+	public ProspectBuilder experience(int experience) {
 		this.experience = experience;
 		return this;
 	}
 
-	public SavageBuilder attack(int attack) {
+	public ProspectBuilder attack(int attack) {
 		this.attack = attack;
 		return this;
 	}
 
-	public SavageBuilder defense(int defense) {
+	public ProspectBuilder defense(int defense) {
 		this.defense = defense;
 		return this;
 	}
 
-	public SavageBuilder hitPoints(int hitPoints) {
+	public ProspectBuilder hitPoints(int hitPoints) {
 		this.hitPoints = hitPoints;
 		return this;
 	}
 
-	public SavageBuilder weapon(Gear weapon) {
+	public ProspectBuilder weapon(Gear weapon) {
 		this.weapon = weapon;
 		return this;
 	}
 
-	public SavageBuilder armor(Gear armor) {
+	public ProspectBuilder armor(Gear armor) {
 		this.armor = armor;
 		return this;
 	}
 
-	public SavageBuilder helm(Gear helm) {
+	public ProspectBuilder helm(Gear helm) {
 		this.helm = helm;
 		return this;
 	}
@@ -59,7 +59,7 @@ public class SavageBuilder {
 	public Hero build() {
 		return new Hero(
 				heroName,
-				"Savage",
+				"Prospect",
 				level,
 				experience,
 				attack,
@@ -70,10 +70,10 @@ public class SavageBuilder {
 				helm,
 				hero -> {
 					hero.attack += 3;
-					hero.defense += 1;
-					hero.hitPoints += 5;
+					hero.defense += 3;
+					hero.hitPoints += 20;
 				},
-				"Attack +3, Defense +1, Hit Points +5"
+				"Attack +3, Defense +3, Hit Points +20"
 		);
 	}
 }
