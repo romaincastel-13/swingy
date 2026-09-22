@@ -1,4 +1,4 @@
-package 42.rcastel;
+package rcastel;
 
 /**
  * Hello world!

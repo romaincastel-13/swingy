@@ -1,4 +1,4 @@
-package 42.rcastel;
+package rcastel;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
