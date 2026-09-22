@@ -7,6 +7,7 @@
   <artifactId>swingy</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+
   <name>swingy</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
@@ -83,6 +84,18 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.6.1</version>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.4.2</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>rcastel.App</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
