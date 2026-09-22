@@ -1,10 +1,14 @@
 package rcastel;
 
-/**
- * Hello world!
- */
+import jakarta.validation.constraints.*;
+
 public class App {
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        if (args.length != 1 || !args[0].equals("console") && !args[0].equals("gui")) {
+           System.out.println("!ERROR! provide ONE argument: 'console' or 'gui' ");
+           return;
+        }
+        System.out.printf("Hello %s!\n", args[0]);
     }
 }

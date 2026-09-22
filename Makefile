@@ -1,6 +1,13 @@
-run:
+all: build run
+
+build:
 	mvn package
-	java -jar target/swingy-1.0-SNAPSHOT.jar
+
+run:
+	java -jar target/swingy-1.0.jar console
+
+rungui:
+	java -jar target/swingy-1.0.jar gui
 
 clean:
 	mvn clean
