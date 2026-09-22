@@ -2,10 +2,6 @@ package rcastel.model.hero;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
-
-import rcastel.model.Loot;
-import rcastel.model.Villain;
 
 @FunctionalInterface
 interface LevelUpRule {
@@ -72,6 +68,16 @@ public class Hero {
         return level;
     }
 
+    public int level_up() {
+        level++;
+        levelUpRule.apply(this);
+        return level;
+    }
+
+    public void gainExperience(int amount) {
+        experience += amount;
+    }
+
     public int getExperience() {
         return experience;
     }
@@ -99,70 +105,5 @@ public class Hero {
         );
     }
 
-    public boolean combat(Villain villain) {
-        System.out.println("\n=== COMBAT ===");
-        System.out.println("%s vVS %s".formatted(heroName, villain.getVillainName()));
-        int hero_attack_score = get_attack_score();
-        int hero_defense_score = get_defense_score();
-        int hero_hit_points_score = get_hit_points_score();
-
-        int villain_attack_score = villain.getAttack();
-        int villain_defense_score = villain.getDefense();
-        int villain_hit_points_score = villain.getHitPoints();
-
-        while (hero_hit_points_score > 0 && villain_hit_points_score > 0) {
-            // Hero attacks first
-            int roll = ThreadLocalRandom.current().nextInt(1, 7);
-            int damage_to_villain = Math.max(
-                    0,
-                    hero_attack_score + roll - villain_defense_score
-            );
-            villain_hit_points_score -= damage_to_villain;
-            System.out.println("PAF => - %d HP (roll: %d) (still alive: %d HP)".formatted(damage_to_villain, roll, villain_hit_points_score));
-
-            if (villain_hit_points_score <= 0) {
-                System.out.println("Well, you survived with %d HP ..".formatted(hero_hit_points_score));
-                on_victory(villain);
-                return true; // Hero wins
-            }
-
-            // Villain attacks
-            roll = ThreadLocalRandom.current().nextInt(1, 7);
-            if (roll == 6) {
-                roll += ThreadLocalRandom.current().nextInt(1, 7);
-                System.out.println("Critical hit!");
-            }
-            int damage_to_hero = Math.max(
-                    0,
-                    villain_attack_score + roll - hero_defense_score
-            );
-            hero_hit_points_score -= damage_to_hero;
-            System.out.println("OUTCH <= - %d HP (roll: %d) (still alive: %d HP)".formatted(damage_to_hero, roll, hero_hit_points_score));
-        }
-
-        System.out.println("WARF YOU WERE DEFEATED BY MIGTHY %s!".formatted(villain.getVillainName()));
-        return false; // Villain wins
-    }
-
-    void on_victory(Villain villain) {
-        System.out.println("You gained %d XP!".formatted(villain.getXpReward()));
-        experience += villain.getXpReward();
-        while (experience >= getLvlThreshold(level + 1)) {
-            level++;
-            levelUpRule.apply(this);
-            System.out.println("Congratulations! You leveled up to level %d!".formatted(level));
-            System.out.println("(%s)".formatted(decription_of_levelUpRule));
-        }
-        if (!villain.getLoot().isEmpty()) {
-            System.out.println("Plus you found some loot! Lucky You!");
-            for (Loot loot : villain.getLoot()) {
-                if (loot instanceof Gear gear) {
-                    System.out.println("- %s (%s, power: %d)".formatted(gear.name, gear.getType(), gear.getPower()));
-                } else {
-                    System.out.println("- %s".formatted(loot.name));
-                }
-            }
-        }
-    }
 
 }

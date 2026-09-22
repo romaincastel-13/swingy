@@ -71,9 +71,7 @@ public class Villain {
     }
 
     public void addKeywords(String...keywords) {
-        for (String keyword : keywords) {
-            this.keywords.add(keyword);
-        }
+        this.keywords.addAll(Arrays.asList(keywords));
     }
 
 
